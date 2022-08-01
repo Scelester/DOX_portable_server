@@ -1,0 +1,130 @@
+==========================================================================
+creat python virtual environment using virtualenv python model
+	> /portable_py/python_web/
+
+: remember to run all python command using the full python path > .../Scripts/python.exe
+
+-------------------------------------------------------------------------
+
+inside the virtualenv folder i.e. python_web/
+import python310.dll
+
+-------------------------------------------------------------------------
+
+.../python.exe -m pip install pipwin
+
+../python.exe -m pipwin install mod-wsgi
+	> this will create some folder inside  sitepackages and script
+
+-------------------------------------------------------------------------
+
+create django_website like how you usually make
+
+inside wsgi.py add(just add dont remove anything):-
+	import sys
+	from from pathlib import Path
+
+	path_hone = str(Path(__file__).parents[1])
+
+	if path_hone not in sys.path:
+	    sys.path.append(path_hone)
+
+
+
+-------------------------------------------------------------------------
+
+inside django settings.py
+
+add lines:-
+    ...
+    ALLOWED_HOSTS = ['*'] : for all localhost support
+    ...
+    STATIC_URL = 'static/'
+    STATIC_ROOT = os.path.join(BASE_DIR.parent, 'static/')
+
+    MEDIA_URL = 'media/'
+    MEDIA_ROOT = os.path.join(BASE_DIR.parent, 'media/')
+
+
+    # set debug = False when app is production ready
+-------------------------------------------------------------------------
+inside urls.py of main app 
+
+add lines:-
+    if settings.DEBUG:
+        urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+        urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+
+
+
+==========================================================================
+==========================================================================
+
+unzip portable xampp rar file in top drive directory
+
+start setup_xampp.bat
+
+-------------------------------------------------------------------------
+
+go to file:  apache/conf/httpd.conf
+
+	and add following line at the end
+
+		LoadFile "/Portable_PY/Python_Web/python310.dll"
+		LoadModule wsgi_module "/Portable_PY/Python_Web/lib/site-packages/mod_wsgi/server/mod_wsgi.cp310-win_amd64.pyd"
+		WSGIPythonHome "/Portable_PY/Python_Web"
+		WSGIPythonPath "/Portable_PY/Python_Web/Lib/site-packages"
+		WSGIScriptAlias / "/path/to/wsgifile/"
+
+
+
+-------------------------------------------------------------------------
+
+go to file: apache/conf/extra/httpd-vhost.conf
+
+
+<VirtualHost *:80>
+    DocumentRoot "/xampp/htdocs"
+    ServerName localhost
+</VirtualHost>
+
+: this is somehow overrid by django
+
+
+
+<VirtualHost *:80>
+    ##ServerAdmin webmaster@dummy-host2.example.com
+    DocumentRoot "/Testinsite"
+    ServerName testin.localhost
+    <Directory "/Testinsite">
+        Options Indexes FollowSymLinks Includes ExecCGI
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+:you can run other webapp along using this
+
+<VirtualHost *:80>
+    ServerName url.localhost
+    DocumentRoot "/whatever"
+    <Directory "/path/to/django/wsgi">
+        <Files wsgi.py>
+            Require all granted
+        </Files>
+    </Directory>
+</VirtualHost>
+:this runs just as you imagine
+
+
+==========================================================================
+
+
+start xampp-control.exe
+
+start apache server
+
+type url.localhost for djangoserver
+or 
+type testin.localhost for other-webapp

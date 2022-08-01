@@ -1,0 +1,43 @@
+{% load static %}
+
+<p style="font-size: 60px;text-align: center;">Internal Test : Passed[Running]</p>
+
+
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Testin</title>
+
+  <link rel="stylesheet" href="{% static 'temp_app/css/testcube.css' %}">
+
+  <script src="{% static 'temp_app/js/testcube.js' %}"></script>
+    
+</head>
+<body>
+
+  <div class="controls" style="text-align: center;">
+    <div><button onclick="toggleShape()">Not-a-cube mode</button></div>
+    <div><input type="checkbox" id="backfaces" onclick="toggleBackfaces()" checked><label for="backfaces">Number mess</label></div>
+  </div>
+
+  <div id="container">
+    <div id="stage">
+      <div id="shape" class="cube backfaces">
+        <div class="plane one">1</div>
+        <div class="plane two">2</div>
+        <div class="plane three">3</div>
+        <div class="plane four">4</div>
+        <div class="plane five">5</div>
+        <div class="plane six">6</div>
+        <div class="plane seven">7</div>
+        <div class="plane eight">8</div>
+        <div class="plane nine">9</div>
+        <div class="plane ten">10</div>
+        <div class="plane eleven">11</div>
+        <div class="plane twelve">12</div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
