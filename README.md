@@ -1,4 +1,4 @@
-## DAOX_portable_server
+## DOX_portable_server
 
 portable server you can carry on your usb/pendrive [based on xampp].
 
