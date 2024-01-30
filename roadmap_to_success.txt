@@ -11,12 +11,15 @@ import python310.dll
 
 -------------------------------------------------------------------------
 
+
 .../python.exe -m pip install pipwin
 
 ../python.exe -m pipwin install mod-wsgi
 	> this will create some folder inside  sitepackages and script
 
+
 -------------------------------------------------------------------------
+
 
 create django_website like how you usually make
 

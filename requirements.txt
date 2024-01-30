@@ -21,4 +21,4 @@ sqlparse==0.4.2
 tzdata==2022.1
 tzlocal==4.2
 urllib3==1.26.10
-whitenoise==6.2.0
+whitenoise
